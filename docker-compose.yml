@@ -1,0 +1,57 @@
+#version: '3'
+version: '2.1'
+
+services:
+
+  nginx:
+    restart: always
+    image: nginx:alpine
+    volumes:
+      - $PWD/config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - $PWD/config/conf.d:/etc/nginx/conf.d:ro
+        #- $PWD/certs:/CERTS:ro
+      - cert-conf_vol:/etc/letsencrypt
+      - cert-www_vol:/var/www/certbot
+        #- $PWD/certbot/conf:/etc/letsencrypt
+        #- $PWD/certbot/www:/var/www/certbot
+      # For /static files access
+      - galaxy_galaxy_vol:/galaxy:ro
+    ports:
+      - "443:443"
+      - "80:80"
+      - "8021:21"
+      - "8022:22"
+    networks:
+      - frontend
+      - galaxy_default
+#    external_links:
+#      - galaxy_galaxy_1:galaxy
+    mem_limit: 128M
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  init-letsencrypt:
+    image: brsynth/base-tools
+    volumes:
+      - cert-conf_vol:/etc/letsencrypt
+      - cert-www_vol:/var/www/certbot
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+            #           - $PWD/certbot/conf:/etc/letsencrypt
+            #            - $PWD/certbot/www:/var/www/certbot
+      - cert-conf_vol:/etc/letsencrypt
+      - cert-www_vol:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+networks:
+  frontend:
+    driver: bridge
+  galaxy_default:
+    external: true
+
+volumes:
+  galaxy_galaxy_vol:
+    external: true
+  cert-conf_vol:
+  cert-www_vol:
