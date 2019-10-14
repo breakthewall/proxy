@@ -12,7 +12,7 @@ services:
       - cert-conf_vol:/etc/letsencrypt
       - cert-www_vol:/var/www/certbot
       # For /static files access
-      - galaxy_galaxy_vol:/galaxy:ro
+      #- galaxy_galaxy_vol:/galaxy:ro
     ports:
       - "443:443"
       - "80:80"
@@ -44,7 +44,7 @@ networks:
     external: true
 
 volumes:
-  galaxy_galaxy_vol:
-    external: true
+        #galaxy_galaxy_vol:
+        #external: true
   cert-conf_vol:
   cert-www_vol:
