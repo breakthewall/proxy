@@ -22,6 +22,7 @@ services:
       - frontend
       - galaxy-dev
       - galaxy-prod
+      - galaxy-test
     mem_limit: 128M
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
@@ -43,6 +44,7 @@ networks:
     driver: bridge
   galaxy-dev:
   galaxy-prod:
+  galaxy-test:
 
 volumes:
         #  galaxy-dev_galaxy_vol:
