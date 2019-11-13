@@ -11,3 +11,4 @@ This code is inspired by https://medium.com/@pentacent/nginx-and-lets-encrypt-wi
 ## Add a new /suffix
 Add entries in ```config/conf.d/galaxy.conf```
 Add network in ```docker-compose.yml in two places```
+Do ```docker create network galaxy-<suffix>```
