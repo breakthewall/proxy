@@ -7,3 +7,7 @@ This code is inspired by https://medium.com/@pentacent/nginx-and-lets-encrypt-wi
 
 ## Run proxy
 ```$ docker-compose up -d nginx```
+
+## Add a new /suffix
+Add entries in ```config/conf.d/galaxy.conf```
+Add network in ```docker-compose.yml in two places```

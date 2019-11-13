@@ -23,6 +23,7 @@ services:
       - galaxy-dev
       - galaxy-prod
       - galaxy-test
+      - galaxy-mssb
     mem_limit: 128M
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
@@ -45,6 +46,7 @@ networks:
   galaxy-dev:
   galaxy-prod:
   galaxy-test:
+  galaxy-mssb:
 
 volumes:
         #  galaxy-dev_galaxy_vol:
