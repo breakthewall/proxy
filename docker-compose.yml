@@ -16,8 +16,8 @@ services:
     ports:
       - "443:443"
       - "80:80"
-      - "8021:21"
-      - "8022:22"
+#      - "8021:21"
+#      - "8022:22"
     networks:
       - frontend
       - galaxy-dev
