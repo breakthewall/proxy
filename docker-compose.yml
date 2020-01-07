@@ -19,7 +19,7 @@ services:
 #      - "8021:21"
 #      - "8022:22"
     networks:
-      - frontend
+      - default
       - galaxy-dev
       - galaxy-prod
       - galaxy-test
@@ -41,7 +41,8 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 networks:
-  frontend:
+  default:
+    name: proxy_frontend
     driver: bridge
   galaxy-dev:
   galaxy-prod:
