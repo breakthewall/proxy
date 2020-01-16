@@ -16,8 +16,11 @@ services:
     ports:
       - "443:443"
       - "80:80"
+<<<<<<< HEAD
 #      - "8021:21"
 #      - "8022:22"
+=======
+>>>>>>> 7588d9235f9200f9602ccf8fdd232fd6ca9eb733
     networks:
       - default
       - galaxy-dev
@@ -50,7 +53,7 @@ networks:
   galaxy-mssb:
 
 volumes:
-        #  galaxy-dev_galaxy_vol:
+        #galaxy-dev_galaxy_vol:
         #external: true
   cert-conf_vol:
   cert-www_vol:
