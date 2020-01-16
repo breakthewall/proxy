@@ -16,13 +16,12 @@ services:
     ports:
       - "443:443"
       - "80:80"
-      - "8021:21"
-      - "8022:22"
     networks:
-      - frontend
+      - default
       - galaxy-dev
       - galaxy-prod
       - galaxy-test
+      - galaxy-mssb
     mem_limit: 128M
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
@@ -40,14 +39,16 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 networks:
-  frontend:
+  default:
+    name: proxy_frontend
     driver: bridge
   galaxy-dev:
   galaxy-prod:
   galaxy-test:
+  galaxy-mssb:
 
 volumes:
-        #  galaxy-dev_galaxy_vol:
+        #galaxy-dev_galaxy_vol:
         #external: true
   cert-conf_vol:
   cert-www_vol:
