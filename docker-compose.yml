@@ -9,49 +9,18 @@ services:
     volumes:
       - $PWD/config/nginx.conf:/etc/nginx/nginx.conf:ro
       - $PWD/config/conf.d:/etc/nginx/conf.d:ro
-      - cert-conf_vol:/etc/letsencrypt
-      - cert-www_vol:/var/www/certbot
-      # For /static files access
-      #- galaxy-dev_galaxy_vol:/galaxy:ro
+      - $PWD/certs:/CERTS
     ports:
       - "443:443"
       - "80:80"
     networks:
       - default
-      - galaxy-dev
-      - galaxy-prod
-      - galaxy-test
-      - galaxy-mssb
-      - xtms
+      - backend
     mem_limit: 128M
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-
-  init-letsencrypt:
-    image: brsynth/base-tools
-    volumes:
-      - cert-conf_vol:/etc/letsencrypt
-      - cert-www_vol:/var/www/certbot
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - cert-conf_vol:/etc/letsencrypt
-      - cert-www_vol:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    mem_limit: 128M
 
 networks:
   default:
     name: proxy_frontend
     driver: bridge
-  galaxy-dev:
-  galaxy-prod:
-  galaxy-test:
-  galaxy-mssb:
-  xtms:
-
-volumes:
-        #galaxy-dev_galaxy_vol:
-        #external: true
-  cert-conf_vol:
-  cert-www_vol:
+  backend:
