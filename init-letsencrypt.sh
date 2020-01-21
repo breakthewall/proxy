@@ -19,13 +19,16 @@ staging=0 # Set to 1 if you're testing your setup to avoid hitting request limit
 #fi
 
 
-docker-compose run --rm init-letsencrypt bash -c "\
-  if [ ! -e \"/etc/letsencrypt/options-ssl-nginx.conf\" ] || [ ! -e \"/etc/letsencrypt/ssl-dhparams.pem\" ]; then \
-    echo \"### Downloading recommended TLS parameters ...\" &&\
-    curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/tls_configs/options-ssl-nginx.conf > \"/etc/letsencrypt/options-ssl-nginx.conf\" &&\
-    curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/ssl-dhparams.pem > \"/etc/letsencrypt/ssl-dhparams.pem\" &&\
-    echo ;\
-  fi"
+# docker-compose run --rm --entrypoint "" certbot sh -c "\
+#   if [ ! -e \"/etc/letsencrypt/options-ssl-nginx.conf\" ]; then \
+#     echo \"### Downloading recommended TLS parameters ...\" &&\
+#     curl -s https://github.com/certbot/certbot/blob/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf > \"/etc/letsencrypt/options-ssl-nginx.conf\"; \
+#   fi
+#   if [ ! -e \"/etc/letsencrypt/ssl-dhparams.pem\" ]; then \
+# #    curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/ssl-dhparams.pem > \"/etc/letsencrypt/ssl-dhparams.pem\" &&\
+#      openssl dhparam -out /etc/letsencrypt/dhparam.pem 4096 ; \
+#   echo ;\
+#   fi"
 
 #  echo $CERT_PATH ;\
 CERT_PATH=/etc/letsencrypt/live/$domains
