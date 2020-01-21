@@ -26,7 +26,7 @@ docker-compose run --rm init-letsencryptsh -c "\
   fi"
 docker-compose run --rm --entrypoint "" certbot sh -c "\
   if [ ! -e \"/etc/letsencrypt/ssl-dhparams.pem\" ]; then \
-     openssl dhparam -out /etc/letsencrypt/dhparam.pem 4096 ; \
+     openssl dhparam -out /etc/letsencrypt/ssl-dhparam.pem 4096 ; \
   echo ;\
   fi"
 
