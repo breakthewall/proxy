@@ -30,9 +30,9 @@ CERT_PATH=/etc/letsencrypt/live/$domain
 docker-compose run --rm --entrypoint "" certbot sh -c "\
   echo \"### Creating dummy certificate for $domain ...\" ;\
   mkdir -p $CERT_PATH ;\
-  openssl req -x509 -nodes -newkey rsa:1024 -days 1\
-    -keyout '$CERT_PATH/privkey.pem' \
-    -out '$CERT_PATH/fullchain.pem' \
+  openssl req -x509 -nodes -newkey rsa:1024 -days 1 \
+    -keyout \"$CERT_PATH/privkey.pem\" \
+    -out \"$CERT_PATH/fullchain.pem\" \
     -subj '/CN=localhost'"
 echo
 #done
