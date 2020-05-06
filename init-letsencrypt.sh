@@ -15,7 +15,7 @@ staging=0 # Set to 1 if you're testing your setup to avoid hitting request limit
 docker-compose run --rm init-letsencrypt sh -c "\
   if [ ! -e \"/etc/letsencrypt/options-ssl-nginx.conf\" ]; then \
     echo \"### Downloading recommended TLS parameters ...\" &&\
-    wget -q https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf -O /etc/options-ssl-nginx.conf; \
+    wget -q https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf -O /etc/letsencrypt/options-ssl-nginx.conf; \
   fi"
 
 docker-compose run --rm --entrypoint "" certbot sh -c "\
