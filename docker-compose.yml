@@ -23,11 +23,9 @@ services:
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
   init-letsencrypt:
-    image: brsynth/base-tools
+    image: alpine
     volumes:
       - cert-conf_vol:/etc/letsencrypt
-      - cert-www_vol:/var/www/certbot
-      - $PWD/init-letsencrypt.sh:/init-letsencrypt.sh:ro
 
   certbot:
     image: certbot/certbot
