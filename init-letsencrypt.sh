@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(synbiocad-dev.micalis.inrae.fr)
+domains=(galaxy-synbiocad.org synbiocad.micalis.inra.fr xtms.micalis.inrae.fr)
 rsa_key_size=4096
 #data_path="./certbot"
 email="joan.herisson@univ-evry.fr" # Adding a valid address is strongly recommended
@@ -22,7 +22,7 @@ staging=0 # Set to 1 if you're testing your setup to avoid hitting request limit
 docker-compose run --rm init-letsencrypt sh -c "\
   if [ ! -e \"/etc/letsencrypt/options-ssl-nginx.conf\" ]; then \
     echo \"### Downloading recommended TLS parameters ...\" &&\
-    curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf > /etc/letsencrypt/options-ssl-nginx.conf; \
+    wget -q https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf -O /etc/options-ssl-nginx.conf; \
   fi"
 docker-compose run --rm --entrypoint "" certbot sh -c "\
   if [ ! -e \"/etc/letsencrypt/ssl-dhparams.pem\" ]; then \
