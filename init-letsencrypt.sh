@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(galaxy-synbiocad.org synbiocad.micalis.inra.fr xtms.micalis.inrae.fr)
+domains=(synbiocad-dev.micalis.inrae.fr)
 rsa_key_size=4096
 #data_path="./certbot"
 email="joan.herisson@univ-evry.fr" # Adding a valid address is strongly recommended
