@@ -36,10 +36,10 @@ services:
 
 networks:
   default:
-    name: proxy_frontend
+    name: proxy-frontend
     driver: bridge
   galaxy:
-    name: proxy_galaxy
+    name: proxy-galaxy
   xtms:
     name: xtms
 
