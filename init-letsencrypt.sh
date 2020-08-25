@@ -5,9 +5,13 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
+<<<<<<< HEAD
 read -p 'Please enter your FQDN to generate the certificate: ' domain
 read -p 'Please enter your email: ' email
 #domains=(galaxy-synbiocad.org synbiocad.micalis.inra.fr xtms.micalis.inrae.fr)
+=======
+IFS=$'\r\n' GLOBIGNORE='*' command eval  'domains=($(cat domains.txt))'
+>>>>>>> galaxy-dev
 rsa_key_size=4096
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
