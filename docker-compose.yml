@@ -15,7 +15,12 @@ services:
       - "80:80"
     networks:
       - default
+<<<<<<< HEAD
       - backend
+=======
+      - galaxy
+      - xtms
+>>>>>>> galaxy-dev
     mem_limit: 128M
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
@@ -23,4 +28,17 @@ networks:
   default:
     name: proxy_frontend
     driver: bridge
+<<<<<<< HEAD
   backend:
+=======
+  galaxy:
+    name: galaxy
+  xtms:
+    name: xtms
+
+volumes:
+        #galaxy-dev_galaxy_vol:
+        #external: true
+  cert-conf_vol:
+  cert-www_vol:
+>>>>>>> galaxy-dev
