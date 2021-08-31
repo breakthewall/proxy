@@ -10,6 +10,8 @@ services:
       - $PWD/config/nginx.conf:/etc/nginx/nginx.conf:ro
       - $PWD/config/conf.d:/etc/nginx/conf.d:ro
       - $PWD/certs:/CERTS
+      - $PWD/html/error:/var/www/error:ro
+      - $PWD/html/img:/var/www/img:ro
     ports:
       - "443:443"
       - "80:80"
